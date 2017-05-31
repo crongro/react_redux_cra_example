@@ -1,6 +1,6 @@
 const initialState = {
   todos : [],
-  completeList : []
+  completeList : [],
 };
 
 const todoReducer = (state = initialState, action) => {
@@ -12,14 +12,19 @@ const todoReducer = (state = initialState, action) => {
   }
    
   switch(action.type) {
+    //set initial data
+    case 'INIT_TODO_DATA':
+      return action.initData;
+
     case 'ADDTODO':
-      console.log(...state.todos);
       return {...state, todos : [...state.todos, action.todo]};
-     case 'COMPLETE_TODO':
+
+    case 'COMPLETE_TODO':
       return {...state, 
         todos : removeCompletedTodo(state.todos, action.todo),
         completeList : [...state.completeList, action.todo]
       };
+
     default: 
       return state;
   }

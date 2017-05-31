@@ -2,14 +2,19 @@ import React from 'react';
 import { connect } from 'react-redux';
 import ListView from './component/ListView';
 import CompleteListView from './component/CompleteListView';
+import {fakeInitData} from './fakeDB/fakeInitData';
 
 class Todo extends React.Component {
+
+	componentDidMount() {
+		fakeInitData().then( initData => {
+			this.props.setInitData(initData);
+		});
+	}
   
   render() {
     let {todos, completeList, addTodo, completeTodo} = this.props;
     
-  	console.log('render...', completeList)
-
     return (
       <div>
         <div>
@@ -42,6 +47,12 @@ const mapDispatchToProps = (dispatch) => {
           type: 'COMPLETE_TODO',
           todo : evt.target.textContent
         }) 
+    },
+    setInitData(initData) {
+    	dispatch({
+    		type : 'INIT_TODO_DATA',
+    		initData : initData
+    	})
     }
   }
 }

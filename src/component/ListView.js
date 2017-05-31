@@ -1,6 +1,5 @@
 import React from 'react';
 
-/* UI Component ListView */
 const ListView = ({data, onClick}) => {
     let listHTML = "";
     if(typeof data !== "undefined") {
