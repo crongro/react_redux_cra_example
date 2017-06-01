@@ -1,4 +1,5 @@
 import React from 'react';
+import './Common.css';
 
 const ListView = ({data, onClick}) => {
     let listHTML = "";

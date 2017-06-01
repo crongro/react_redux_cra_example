@@ -13,7 +13,7 @@ const todoReducer = (state = initialState, action) => {
    
   switch(action.type) {
     //set initial data
-    case 'INIT_TODO_DATA':
+    case 'SET_INIT_DATA':
       return action.initData;
 
     case 'ADDTODO':

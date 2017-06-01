@@ -2,14 +2,19 @@ import React from 'react';
 import { connect } from 'react-redux';
 import ListView from './component/ListView';
 import CompleteListView from './component/CompleteListView';
-import {fakeInitData} from './fakeDB/fakeInitData';
+
+import * as actions from './action/index'
 
 class Todo extends React.Component {
 
+	// componentDidMount() {
+	// 	fakeInitData().then( initData => {
+	// 		this.props.setInitData(initData);
+	// 	});
+	// }
+
 	componentDidMount() {
-		fakeInitData().then( initData => {
-			this.props.setInitData(initData);
-		});
+		this.props.getInitData();
 	}
   
   render() {
@@ -37,22 +42,13 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     addTodo(evt) {
-        dispatch({
-          type: 'ADDTODO',
-          todo : evt.target.previousSibling.value
-        }) 
+      dispatch(actions.addTodo(evt))
     },
     completeTodo(evt) {
-        dispatch({
-          type: 'COMPLETE_TODO',
-          todo : evt.target.textContent
-        }) 
+      dispatch(actions.completeTodo(evt)) 
     },
-    setInitData(initData) {
-    	dispatch({
-    		type : 'INIT_TODO_DATA',
-    		initData : initData
-    	})
+    getInitData() {
+    	dispatch(actions.getInitData(dispatch))
     }
   }
 }
@@ -61,7 +57,6 @@ const TodoContainer = connect(
   mapStateToProps,
   mapDispatchToProps
 )(Todo);
-
 export default TodoContainer;
   
  
